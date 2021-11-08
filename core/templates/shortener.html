@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>links</title>
+</head>
+<body>
+    {% if not new_url %}
+        <form action="." method="post" >
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="submit" value="сократить">
+        </form>
+    {% endif %}
+    <br>
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

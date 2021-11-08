@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: sh -c "python manage.py migrate
+      && python manage.py collectstatic --noinput
+      && gunicorn testovoe_x.wsgi:application --bind 0.0.0.0:8000"
+    ports:
+      - '8000:8000'
+    volumes:
+      - static_volume:/usr/src/testovoe_x/static
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/usr/src/testovoe_x/static
+    ports:
+      - '8080:8080'
+
+volumes:
+  static_volume:
+
